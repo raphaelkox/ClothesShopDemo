@@ -14,6 +14,9 @@ public class PlayerControl : MonoBehaviour
     public event EventHandler OnInteractPerformed;
     public event EventHandler OnInteractCanceled;
 
+    public event EventHandler OnSwitchInteractionPerformed;
+    public event EventHandler OnSwitchInteractionCanceled;
+
     private GameControls gameControls;
 
     private void Start() {
@@ -25,9 +28,12 @@ public class PlayerControl : MonoBehaviour
         gameControls.Player.Interact.performed += Interact_performed;
         gameControls.Player.Interact.canceled += Interact_canceled;
 
+        gameControls.Player.SwithInteraction.performed += SwithInteraction_performed;
+        gameControls.Player.SwithInteraction.canceled += SwithInteraction_canceled;
+
         gameControls.Player.Enable();
         //TODO disable Menu Controls
-    }       
+    }
 
     private void Movement_updated(InputAction.CallbackContext ctx) {
         OnMovementInput?.Invoke(this, new Vector2InputEventArgs{ 
@@ -41,5 +47,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Interact_canceled(InputAction.CallbackContext obj) {
         OnInteractCanceled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SwithInteraction_performed(InputAction.CallbackContext obj) {
+        OnSwitchInteractionPerformed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SwithInteraction_canceled(InputAction.CallbackContext obj) {
+        OnSwitchInteractionCanceled?.Invoke(this, EventArgs.Empty);
     }
 }
