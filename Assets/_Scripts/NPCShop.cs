@@ -1,3 +1,4 @@
+using AYellowpaper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,13 +15,36 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     [SerializeField] private SpriteRenderer interactionIcon;
     
     [SerializeField] private ShopOptionsWindow shopOptionsWindow;
+    [SerializeField] private InterfaceReference<IUIShopWindow> buyWindow;
+    [SerializeField] private InterfaceReference<IUIShopWindow> sellWindow;
+    [SerializeField] private ShopItemListSO shopItemList;
 
     private bool interactionBlocked;
 
     private void Start() {
+        HideObjects();
+        RegisterEvents();
+    }
+
+    private void HideObjects() {
         interactionIcon.enabled = false;
         shopOptionsWindow.Hide();
+        buyWindow.Value.Hide();
     }
+
+    private void RegisterEvents() {
+        shopOptionsWindow.OnBuyClick += ShopOptionsWindow_OnBuyClick;
+        shopOptionsWindow.OnSellClick += ShopOptionsWindow_OnSellClick;        
+    }
+
+    private void ShopOptionsWindow_OnBuyClick(object sender, EventArgs e) {
+        buyWindow.Value.PopulateItems(shopItemList);
+        UIWindowStack.Instance.PushWindow(buyWindow.Value);
+    }
+
+    private void ShopOptionsWindow_OnSellClick(object sender, EventArgs e) {
+        
+    }    
 
     private void ShopOptionsWindow_OnWindowClose(object sender, EventArgs e) {
         InteractEnd();

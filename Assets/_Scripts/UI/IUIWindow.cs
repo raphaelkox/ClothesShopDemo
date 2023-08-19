@@ -19,3 +19,8 @@ public interface IUIWindow
     void OnLeftInput();
     void OnRightInput();
 }
+
+public interface IUIShopWindow : IUIWindow
+{
+    void PopulateItems(ShopItemListSO itemList);
+}

@@ -8,27 +8,25 @@ using UnityEngine.UI;
 public class ShopOptionsWindow : MonoBehaviour, IUIWindow
 {
     public event EventHandler<IUIWindow.WindowEventArgs> OnWindowClose;
+    public event EventHandler OnBuyClick;
+    public event EventHandler OnSellClick;
 
     [SerializeField] private Button buyButton;
-    [SerializeField] private Button sellButton;
+    [SerializeField] private Button sellButton;    
 
-    [SerializeField] private InterfaceReference<IUIWindow> buyWindow;
-    [SerializeField] private InterfaceReference<IUIWindow> sellWindow;
-
-    private void Start() {
-        buyWindow.Value.Hide();
+    private void Start() {        
         buyButton.onClick.AddListener(BuyClickHandler);
         sellButton.onClick.AddListener(SellClickHandler);
     }
 
     private void BuyClickHandler() {
         Hide();
-        buyWindow.Value.Show();
-        UIWindowStack.Instance.PushWindow(buyWindow.Value);
+        OnBuyClick?.Invoke(this, EventArgs.Empty);        
     }
 
     private void SellClickHandler() {
         Hide();
+        OnSellClick?.Invoke(this, EventArgs.Empty);
     }
 
     #region IUIWindow Implementation
