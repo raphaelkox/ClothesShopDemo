@@ -5,18 +5,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CartItemUI : ShopItemUI
+public class CartItemUI : BaseItemUI
 {
     public event EventHandler<CartItemEventArgs> OnItemRemoved;
     public class CartItemEventArgs : EventArgs {
         public int ItemIndex;
     }
 
+    [SerializeField] protected TextMeshProUGUI priceTextObject;
+
     private int index;
-    private ShopCartSubWindow parentCartWindow;
+
+    public override void SetItem(ItemSO item) {
+        base.SetItem(item);
+
+        priceTextObject.text = item.Price.ToString("F2");
+    }
 
     public void SetParentWindow(ShopCartSubWindow parentWindow) {
-        this.parentCartWindow = parentWindow;
         OnItemRemoved += parentWindow.RemoveItem;
     }
 

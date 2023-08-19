@@ -4,33 +4,53 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopCartSubWindow : MonoBehaviour
 {
+    public event EventHandler OnCartCheckout;
+
     [SerializeField] private Transform containerTransform;
     [SerializeField] private CartItemUI templateItemSlot;
     [SerializeField] private TextMeshProUGUI subTotalTextObject;
+    [SerializeField] private Color subTotalOkTextColor = Color.white;
+    [SerializeField] private Color subTotalBlockedTextColor = Color.white;
+    [SerializeField] private Button checkoutButton;
 
-    public List<ShopItemSO> cartItems = new List<ShopItemSO>();
+    public List<ItemSO> cartItems = new List<ItemSO>();
 
     private float subTotal;
 
+    private void Start() {
+        checkoutButton.onClick.AddListener(OnCheckoutClick);
+    }
+
+    private void OnCheckoutClick() {
+        PlayerInventory.Instance.BuyItems(cartItems, subTotal);
+
+        OnCartCheckout?.Invoke(this, EventArgs.Empty);
+
+        Clear();
+    }
+
     public void Clear() {
         cartItems.Clear();
+        subTotal = 0f;
+        UpdateSubtotal();
 
         foreach (Transform child in containerTransform) {
             child.gameObject.SetActive(false);
         }
     }
 
-    public void AddItem(ShopItemSO item) {
+    public void AddItem(ItemSO item) {
         CartItemUI itemSlot;
-
-        //slots free for reuse
+        
         if (cartItems.Count >= containerTransform.childCount) {
             itemSlot = Instantiate(templateItemSlot, containerTransform);
             itemSlot.SetParentWindow(this);
-        } else { 
+        } else {
+            //slots free for reuse
             itemSlot = containerTransform.GetChild(cartItems.Count).GetComponent<CartItemUI>();            
         }
 
@@ -49,20 +69,20 @@ public class ShopCartSubWindow : MonoBehaviour
         RemoveItemFromList(index);
     }
 
-    private void AddItemToList(ShopItemSO item) {
+    private void AddItemToList(ItemSO item) {
         cartItems.Add(item);
 
         subTotal += item.Price;
-        subTotalTextObject.text = subTotal.ToString("F2");
+        UpdateSubtotal();
 
         UpdateItemIndexes();
     }
 
     private void RemoveItemFromList(int index) {
-        ShopItemSO item = cartItems[index];
+        ItemSO item = cartItems[index];
 
         subTotal -= item.Price;
-        subTotalTextObject.text = subTotal.ToString("F2");
+        UpdateSubtotal();
 
         cartItems.RemoveAt(index);
 
@@ -73,5 +93,13 @@ public class ShopCartSubWindow : MonoBehaviour
         for (int i = 0; i < containerTransform.childCount; i++) {
             containerTransform.GetChild(i).GetComponent<CartItemUI>().SetIndex(i);
         }
+    }
+
+    private void UpdateSubtotal() {
+        subTotalTextObject.text = subTotal.ToString("F2");
+
+        bool playerHasEnoughMoney = PlayerInventory.Instance.HasEnoughMoney(subTotal);
+        subTotalTextObject.color = playerHasEnoughMoney ? subTotalOkTextColor : subTotalBlockedTextColor;
+        checkoutButton.interactable = playerHasEnoughMoney;
     }
 }
