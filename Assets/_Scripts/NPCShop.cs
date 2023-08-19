@@ -15,8 +15,10 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     [SerializeField] private SpriteRenderer interactionIcon;
     
     [SerializeField] private ShopOptionsWindow shopOptionsWindow;
-    [SerializeField] private InterfaceReference<IUIShopWindow> buyWindow;
-    [SerializeField] private InterfaceReference<IUIShopWindow> sellWindow;
+    [SerializeField] private ShopWindow shopWindow;
+    [Space]
+    [SerializeField] private ShopWindowStyleSO buyWindowStyle;
+    [SerializeField] private ShopWindowStyleSO sellWindowStyle;
     [SerializeField] private ShopItemListSO shopItemList;
 
     private bool interactionBlocked;
@@ -26,10 +28,21 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
         RegisterEvents();
     }
 
+    private void BuyItems(object sender, ShopCartSubWindow.CartWindowActionEventArgs e) {
+        PlayerInventory.Instance.BuyItems(e.ItemList, e.MoneyAmount);
+    }
+
+    private void SellItems(object sender, ShopCartSubWindow.CartWindowActionEventArgs e) {
+        PlayerInventory.Instance.SellItems(e.ItemList, e.MoneyAmount);
+
+        //refresh shop view
+        shopWindow.PopulateItems(PlayerInventory.Instance.GetItems());
+    }
+
     private void HideObjects() {
         interactionIcon.enabled = false;
         shopOptionsWindow.Hide();
-        buyWindow.Value.Hide();
+        shopWindow.Hide();
     }
 
     private void RegisterEvents() {
@@ -38,12 +51,17 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     }
 
     private void ShopOptionsWindow_OnBuyClick(object sender, EventArgs e) {
-        buyWindow.Value.PopulateItems(shopItemList);
-        UIWindowStack.Instance.PushWindow(buyWindow.Value);
+        shopWindow.SetTitleBar(buyWindowStyle.TitleText, buyWindowStyle.TitleBarColor);
+        shopWindow.RegisterWindowCartAction(BuyItems);
+        shopWindow.PopulateItems(shopItemList.Items);
+        UIWindowStack.Instance.PushWindow(shopWindow);
     }
 
     private void ShopOptionsWindow_OnSellClick(object sender, EventArgs e) {
-        
+        shopWindow.SetTitleBar(sellWindowStyle.TitleText, sellWindowStyle.TitleBarColor);
+        shopWindow.RegisterWindowCartAction(SellItems);
+        shopWindow.PopulateItems(PlayerInventory.Instance.GetItems());
+        UIWindowStack.Instance.PushWindow(shopWindow);
     }    
 
     private void ShopOptionsWindow_OnWindowClose(object sender, EventArgs e) {

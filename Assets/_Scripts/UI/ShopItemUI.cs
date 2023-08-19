@@ -20,7 +20,7 @@ public class ShopItemUI : BaseItemUI
         priceTextObject.text = item.Price.ToString("F2");
     }
 
-    public void SetParentWindow(ShopBuyWindow parentWindow) {
+    public void SetParentWindow(ShopWindow parentWindow) {
         OnAddItemToCart += parentWindow.AddItemToCart;
     }
 

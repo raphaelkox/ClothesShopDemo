@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryItemUI : BaseItemUI
 {
@@ -25,5 +24,5 @@ public class InventoryItemUI : BaseItemUI
                 item = item,
             });
         }
-    }
+    }    
 }

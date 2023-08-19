@@ -8,27 +8,33 @@ using UnityEngine.UI;
 
 public class ShopCartSubWindow : MonoBehaviour
 {
-    public event EventHandler OnCartCheckout;
+    public event EventHandler<CartWindowActionEventArgs> OnCartAction;
+    public class CartWindowActionEventArgs {
+        public List<ItemSO> ItemList;
+        public List<int> ItemIndexes;
+        public float MoneyAmount;
+    }
 
     [SerializeField] private Transform containerTransform;
     [SerializeField] private CartItemUI templateItemSlot;
     [SerializeField] private TextMeshProUGUI subTotalTextObject;
     [SerializeField] private Color subTotalOkTextColor = Color.white;
     [SerializeField] private Color subTotalBlockedTextColor = Color.white;
-    [SerializeField] private Button checkoutButton;
+    [SerializeField] private Button actionButton;
 
     public List<ItemSO> cartItems = new List<ItemSO>();
 
     private float subTotal;
 
     private void Start() {
-        checkoutButton.onClick.AddListener(OnCheckoutClick);
+        actionButton.onClick.AddListener(OnActionClick);
     }
 
-    private void OnCheckoutClick() {
-        PlayerInventory.Instance.BuyItems(cartItems, subTotal);
-
-        OnCartCheckout?.Invoke(this, EventArgs.Empty);
+    private void OnActionClick() {       
+        OnCartAction?.Invoke(this, new CartWindowActionEventArgs {
+            ItemList = cartItems,
+            MoneyAmount = subTotal
+        });
 
         Clear();
     }
@@ -37,6 +43,7 @@ public class ShopCartSubWindow : MonoBehaviour
         cartItems.Clear();
         subTotal = 0f;
         UpdateSubtotal();
+        SetActionState(false);
 
         foreach (Transform child in containerTransform) {
             child.gameObject.SetActive(false);
@@ -100,6 +107,10 @@ public class ShopCartSubWindow : MonoBehaviour
 
         bool playerHasEnoughMoney = PlayerInventory.Instance.HasEnoughMoney(subTotal);
         subTotalTextObject.color = playerHasEnoughMoney ? subTotalOkTextColor : subTotalBlockedTextColor;
-        checkoutButton.interactable = playerHasEnoughMoney;
+        SetActionState(playerHasEnoughMoney);
+    }
+
+    public void SetActionState(bool newState) {
+        actionButton.interactable = newState;
     }
 }

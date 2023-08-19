@@ -770,10 +770,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionIcon: {fileID: 1828837169}
   shopOptionsWindow: {fileID: 438020356}
-  buyWindow:
-    _underlyingValue: {fileID: 1726977744}
-  sellWindow:
-    _underlyingValue: {fileID: 0}
+  shopWindow: {fileID: 1726977744}
+  buyWindowStyle: {fileID: 11400000, guid: cf83e9c811e564c478bf9cddf3338ce9, type: 2}
+  sellWindowStyle: {fileID: 11400000, guid: a5c0d20b0046b9041a45a4b8ba5a4e50, type: 2}
   shopItemList: {fileID: 11400000, guid: 4de9c96e87b893f4bbe257093b374416, type: 2}
 --- !u!58 &143923941
 CircleCollider2D:
@@ -2678,6 +2677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 616699757}
   - component: {fileID: 616699758}
+  - component: {fileID: 616699759}
   m_Layer: 5
   m_Name: TitleDiv
   m_TagString: Untagged
@@ -2714,6 +2714,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616699756}
   m_CullTransparentMesh: 1
+--- !u!114 &616699759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616699756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a74c1e413c28104c99c8a8e245ed14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleTextObject: {fileID: 652639112}
+  titleBar: {fileID: 2089212338}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,6 +3533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937274615}
   - component: {fileID: 937274616}
+  - component: {fileID: 937274617}
   m_Layer: 5
   m_Name: TitleDiv
   m_TagString: Untagged
@@ -3555,6 +3570,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937274614}
   m_CullTransparentMesh: 1
+--- !u!114 &937274617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937274614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a74c1e413c28104c99c8a8e245ed14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleTextObject: {fileID: 1827055417}
+  titleBar: {fileID: 582282429}
 --- !u!1 &970997408
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,7 +4960,7 @@ GameObject:
   - component: {fileID: 1726977743}
   - component: {fileID: 1726977744}
   m_Layer: 5
-  m_Name: BuyWindow
+  m_Name: ShopWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4971,6 +5000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710799b07b0bf1b4e93523be9835953e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windowTitleBar: {fileID: 616699759}
+  cartTitleBar: {fileID: 937274617}
   containerTransform: {fileID: 598903424}
   templateItemSlot: {fileID: 1672987668}
   closeButton: {fileID: 777486676}
@@ -5576,7 +5607,7 @@ MonoBehaviour:
   subTotalTextObject: {fileID: 1052450538}
   subTotalOkTextColor: {r: 1, g: 1, b: 1, a: 1}
   subTotalBlockedTextColor: {r: 1, g: 0, b: 0, a: 1}
-  checkoutButton: {fileID: 1989422000}
+  actionButton: {fileID: 1989422000}
   cartItems: []
 --- !u!1 &2088575011
 GameObject:

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventoryWindow : MonoBehaviour, IUIWindow
+public class PlayerInventoryWindowUI : MonoBehaviour, IUIWindow
 {
     public event EventHandler<IUIWindow.WindowEventArgs> OnWindowClose;
 
@@ -13,7 +13,23 @@ public class PlayerInventoryWindow : MonoBehaviour, IUIWindow
 
     private void Start() {
         playerInventory.OnItemsAdded += PlayerInventory_OnItemsAdded;
+        playerInventory.OnItemsRemoved += PlayerInventory_OnItemsRemoved;
         //Hide();
+    }
+
+    private void PlayerInventory_OnItemsRemoved(object sender, PlayerInventory.InventoryItemsEventArgs e) {
+        InventoryItemUI itemUI;
+        ItemSO itemObj;
+
+        for (int i = containerTransform.childCount - 1; i >= 0; i--) {
+            itemUI = containerTransform.GetChild(i).GetComponent<InventoryItemUI>();
+            itemObj = itemUI.Getitem();
+            if (e.ItemList.Contains(itemObj))
+            {
+                itemUI.Reset();
+                e.ItemList.Remove(itemObj);
+            }
+        }
     }
 
     private void PlayerInventory_OnItemsAdded(object sender, PlayerInventory.InventoryItemsEventArgs e) {
