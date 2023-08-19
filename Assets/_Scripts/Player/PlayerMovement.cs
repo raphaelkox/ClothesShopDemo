@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private PlayerControl playerControl;
+    [SerializeField] private PlayerControl playerControl;    
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Vector2 moveSpeed;
 
@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerControl.OnMovementInput += PlayerControl_OnMovementInput;
+        playerControl.OnPlayer_MovementInput += PlayerControl_OnMovementInput;        
     }
 
     private void PlayerControl_OnMovementInput(object sender, PlayerControl.Vector2InputEventArgs e) {
