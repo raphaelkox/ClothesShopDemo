@@ -19,11 +19,17 @@ public class PlayerInventory : MonoBehaviour
 
     public static PlayerInventory Instance;
 
+    [SerializeField] float startingMoney;
+
     private List<ItemSO> itemList = new List<ItemSO>();
-    private float money = 50;
+    private float money;
 
     private void Awake() {
         Instance = this;
+    }
+
+    private void Start() {
+        AddMoney(startingMoney);
     }
 
     public List<ItemSO> GetItems() {

@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SwithInteraction",
+                    "name": "InventoryOpen",
                     "type": "Button",
                     "id": "982740d4-1947-4f06-90db-35b39912b3f6",
                     "expectedControlType": "Button",
@@ -107,7 +107,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SwithInteraction",
+                    "action": "InventoryOpen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -166,6 +166,15 @@
                     "name": "Right",
                     "type": "Button",
                     "id": "1982cbff-a354-4085-915a-bd6c68a9133f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryClose",
+                    "type": "Button",
+                    "id": "93ce8fe3-26bc-4e64-b210-d5a41bff6e25",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -258,6 +267,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ac9c39d-a62c-4ac9-bac7-edd83ca29f49",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryClose",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

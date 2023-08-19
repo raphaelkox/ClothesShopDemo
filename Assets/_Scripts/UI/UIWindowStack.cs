@@ -51,7 +51,7 @@ public class UIWindowStack : MonoBehaviour
 
         windowStack.Clear();
         currentWindow = null;
-        OnLastWindowClosed?.Invoke(this, EventArgs.Empty);
+        OnLastWindowClosed?.Invoke(this, EventArgs.Empty);        
     }
 
     private void Instance_OnMenu_RightPerformed(object sender, EventArgs e) {

@@ -1,20 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PlayerInventoryWindowUI : MonoBehaviour, IUIWindow
+public class PlayerInventoryWindowUI : MonoBehaviour
 {
-    public event EventHandler<IUIWindow.WindowEventArgs> OnWindowClose;
-
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private Transform containerTransform;
     [SerializeField] private InventoryItemUI templateItemSlot;
+    [SerializeField] private TextMeshProUGUI moneyTextObject;
+
+    private bool state;
 
     private void Start() {
         playerInventory.OnItemsAdded += PlayerInventory_OnItemsAdded;
         playerInventory.OnItemsRemoved += PlayerInventory_OnItemsRemoved;
-        //Hide();
+        playerInventory.OnMoneyChanged += PlayerInventory_OnMoneyChanged;
+        PlayerControl.Instance.OnPlayer_InventoryOpenPerformed += Instance_OnPlayer_InventoryOpenPerformed;
+        Hide();
+    }
+
+    private void PlayerInventory_OnMoneyChanged(object sender, PlayerInventory.InventoryMoneyEventArgs e) {
+        moneyTextObject.text = e.CurrentValue.ToString("F2");
+    }
+
+    private void Instance_OnPlayer_InventoryOpenPerformed(object sender, EventArgs e) {
+        state = !state;
+
+        if (state) {
+            Show();
+        }
+        else {
+            Hide();
+        }
     }
 
     private void PlayerInventory_OnItemsRemoved(object sender, PlayerInventory.InventoryItemsEventArgs e) {
@@ -56,13 +75,6 @@ public class PlayerInventoryWindowUI : MonoBehaviour, IUIWindow
         itemSlot.gameObject.SetActive(true);        
     }
 
-    private void CloseWindow() {
-        Hide();
-        PlayerControl.Instance.DisableMenuInput();
-        PlayerControl.Instance.EnablePlayerInput();
-    }
-
-    #region IUIWindow Implementation
     public void Show() {
         gameObject.SetActive(true);
     }
@@ -70,25 +82,4 @@ public class PlayerInventoryWindowUI : MonoBehaviour, IUIWindow
     public void Hide() {
         gameObject.SetActive(false);
     }
-
-    public void OnAcceptInput() {
-    }
-
-    public void OnCancelInput() {
-        CloseWindow();
-    }
-
-    public void OnDownInput() {
-    }
-
-    public void OnLeftInput() {
-    }
-
-    public void OnRightInput() {
-    }
-
-    public void OnUpInput() {
-    }
-
-    #endregion IUIWindow Implementation 
 }

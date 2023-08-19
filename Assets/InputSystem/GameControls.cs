@@ -46,7 +46,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwithInteraction"",
+                    ""name"": ""InventoryOpen"",
                     ""type"": ""Button"",
                     ""id"": ""982740d4-1947-4f06-90db-35b39912b3f6"",
                     ""expectedControlType"": ""Button"",
@@ -129,7 +129,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SwithInteraction"",
+                    ""action"": ""InventoryOpen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -188,6 +188,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""name"": ""Right"",
                     ""type"": ""Button"",
                     ""id"": ""1982cbff-a354-4085-915a-bd6c68a9133f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryClose"",
+                    ""type"": ""Button"",
+                    ""id"": ""93ce8fe3-26bc-4e64-b210-d5a41bff6e25"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -282,6 +291,17 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ac9c39d-a62c-4ac9-bac7-edd83ca29f49"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -309,7 +329,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_SwithInteraction = m_Player.FindAction("SwithInteraction", throwIfNotFound: true);
+        m_Player_InventoryOpen = m_Player.FindAction("InventoryOpen", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Accept = m_Menu.FindAction("Accept", throwIfNotFound: true);
@@ -318,6 +338,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_Menu_Down = m_Menu.FindAction("Down", throwIfNotFound: true);
         m_Menu_Left = m_Menu.FindAction("Left", throwIfNotFound: true);
         m_Menu_Right = m_Menu.FindAction("Right", throwIfNotFound: true);
+        m_Menu_InventoryClose = m_Menu.FindAction("InventoryClose", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -379,14 +400,14 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_SwithInteraction;
+    private readonly InputAction m_Player_InventoryOpen;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
         public PlayerActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @SwithInteraction => m_Wrapper.m_Player_SwithInteraction;
+        public InputAction @InventoryOpen => m_Wrapper.m_Player_InventoryOpen;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -402,9 +423,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @SwithInteraction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithInteraction;
-                @SwithInteraction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithInteraction;
-                @SwithInteraction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwithInteraction;
+                @InventoryOpen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOpen;
+                @InventoryOpen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOpen;
+                @InventoryOpen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventoryOpen;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -415,9 +436,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @SwithInteraction.started += instance.OnSwithInteraction;
-                @SwithInteraction.performed += instance.OnSwithInteraction;
-                @SwithInteraction.canceled += instance.OnSwithInteraction;
+                @InventoryOpen.started += instance.OnInventoryOpen;
+                @InventoryOpen.performed += instance.OnInventoryOpen;
+                @InventoryOpen.canceled += instance.OnInventoryOpen;
             }
         }
     }
@@ -432,6 +453,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_Down;
     private readonly InputAction m_Menu_Left;
     private readonly InputAction m_Menu_Right;
+    private readonly InputAction m_Menu_InventoryClose;
     public struct MenuActions
     {
         private @GameControls m_Wrapper;
@@ -442,6 +464,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @Down => m_Wrapper.m_Menu_Down;
         public InputAction @Left => m_Wrapper.m_Menu_Left;
         public InputAction @Right => m_Wrapper.m_Menu_Right;
+        public InputAction @InventoryClose => m_Wrapper.m_Menu_InventoryClose;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,6 +492,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Right.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnRight;
                 @Right.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnRight;
                 @Right.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnRight;
+                @InventoryClose.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnInventoryClose;
+                @InventoryClose.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnInventoryClose;
+                @InventoryClose.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnInventoryClose;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -491,6 +517,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Right.started += instance.OnRight;
                 @Right.performed += instance.OnRight;
                 @Right.canceled += instance.OnRight;
+                @InventoryClose.started += instance.OnInventoryClose;
+                @InventoryClose.performed += instance.OnInventoryClose;
+                @InventoryClose.canceled += instance.OnInventoryClose;
             }
         }
     }
@@ -508,7 +537,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnSwithInteraction(InputAction.CallbackContext context);
+        void OnInventoryOpen(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
@@ -518,5 +547,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnInventoryClose(InputAction.CallbackContext context);
     }
 }

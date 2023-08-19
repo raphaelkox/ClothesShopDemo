@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
 
     public event EventHandler OnPlayer_InteractPerformed;
     public event EventHandler OnPlayer_InteractCanceled;
+    public event EventHandler OnPlayer_InventoryOpenPerformed;
+    public event EventHandler OnPlayer_InventoryOpenCanceled;
     //Menu Map
     public event EventHandler OnMenu_UpPerformed;
     public event EventHandler OnMenu_DownPerformed;
@@ -23,6 +25,8 @@ public class PlayerControl : MonoBehaviour
     public event EventHandler OnMenu_RightPerformed;
     public event EventHandler OnMenu_AcceptPerformed;
     public event EventHandler OnMenu_CancelPerformed;
+    public event EventHandler OnMenu_InventoryClosePerformed;
+    public event EventHandler OnMenu_InventoryCloseCanceled;
 
     private GameControls gameControls;
 
@@ -34,24 +38,29 @@ public class PlayerControl : MonoBehaviour
         gameControls = new GameControls();
 
         //Player Map
-        gameControls.Player.Movement.performed += Movement_updated;
-        gameControls.Player.Movement.canceled += Movement_updated;
+        gameControls.Player.Movement.performed += Player_Movement_updated;
+        gameControls.Player.Movement.canceled += Player_Movement_updated;
 
-        gameControls.Player.Interact.performed += Interact_performed;
-        gameControls.Player.Interact.canceled += Interact_canceled;
+        gameControls.Player.Interact.performed += Player_Interact_performed;
+        gameControls.Player.Interact.canceled += Player_Interact_canceled;
+
+        gameControls.Player.InventoryOpen.performed += Player_InventoryOpen_performed;
+        gameControls.Player.InventoryOpen.canceled += Player_InventoryOpen_canceled;
 
         gameControls.Player.Enable();
 
-        gameControls.Menu.Up.performed += Up_performed;
-        gameControls.Menu.Down.performed += Down_performed;
-        gameControls.Menu.Left.performed += Left_performed;
-        gameControls.Menu.Right.performed += Right_performed;
-        gameControls.Menu.Accept.performed += Accept_performed;
-        gameControls.Menu.Cancel.performed += Cancel_performed;
+        gameControls.Menu.Up.performed += Menu_Up_performed;
+        gameControls.Menu.Down.performed += Menu_Down_performed;
+        gameControls.Menu.Left.performed += Menu_Left_performed;
+        gameControls.Menu.Right.performed += Menu_Right_performed;
+        gameControls.Menu.Accept.performed += Menu_Accept_performed;
+        gameControls.Menu.Cancel.performed += Menu_Cancel_performed;
+        gameControls.Menu.InventoryClose.performed += InventoryClose_performed;
+        gameControls.Menu.InventoryClose.canceled += InventoryClose_canceled;
 
         gameControls.Menu.Disable();
-    }
-    
+    }    
+
     //Player Map
     public void EnablePlayerInput() {
         gameControls.Player.Enable();
@@ -61,18 +70,26 @@ public class PlayerControl : MonoBehaviour
         gameControls.Player.Disable();
     }
 
-    private void Movement_updated(InputAction.CallbackContext ctx) {
+    private void Player_Movement_updated(InputAction.CallbackContext ctx) {
         OnPlayer_MovementInput?.Invoke(this, new Vector2InputEventArgs{ 
             inputValue = ctx.ReadValue<Vector2>()
         });
     }
 
-    private void Interact_performed(InputAction.CallbackContext obj) {
+    private void Player_Interact_performed(InputAction.CallbackContext obj) {
         OnPlayer_InteractPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Interact_canceled(InputAction.CallbackContext obj) {
+    private void Player_Interact_canceled(InputAction.CallbackContext obj) {
         OnPlayer_InteractCanceled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Player_InventoryOpen_canceled(InputAction.CallbackContext obj) {
+        OnPlayer_InventoryOpenCanceled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Player_InventoryOpen_performed(InputAction.CallbackContext obj) {
+        OnPlayer_InventoryOpenPerformed?.Invoke(this, EventArgs.Empty);
     }
 
     //Menu Map
@@ -84,27 +101,35 @@ public class PlayerControl : MonoBehaviour
         gameControls.Menu.Disable();
     }
 
-    private void Up_performed(InputAction.CallbackContext obj) {
+    private void Menu_Up_performed(InputAction.CallbackContext obj) {
         OnMenu_UpPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Down_performed(InputAction.CallbackContext obj) {
+    private void Menu_Down_performed(InputAction.CallbackContext obj) {
         OnMenu_DownPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Left_performed(InputAction.CallbackContext obj) {
+    private void Menu_Left_performed(InputAction.CallbackContext obj) {
         OnMenu_LeftPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Right_performed(InputAction.CallbackContext obj) {
+    private void Menu_Right_performed(InputAction.CallbackContext obj) {
         OnMenu_RightPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Accept_performed(InputAction.CallbackContext obj) {
+    private void Menu_Accept_performed(InputAction.CallbackContext obj) {
         OnMenu_AcceptPerformed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void Cancel_performed(InputAction.CallbackContext obj) {
+    private void Menu_Cancel_performed(InputAction.CallbackContext obj) {
         OnMenu_CancelPerformed?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void InventoryClose_canceled(InputAction.CallbackContext obj) {
+        OnMenu_InventoryCloseCanceled?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void InventoryClose_performed(InputAction.CallbackContext obj) {
+        OnMenu_InventoryClosePerformed?.Invoke(this, EventArgs.Empty);
     }
 }
