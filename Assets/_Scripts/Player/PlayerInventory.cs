@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -19,7 +20,8 @@ public class PlayerInventory : MonoBehaviour
 
     public static PlayerInventory Instance;
 
-    [SerializeField] float startingMoney;
+    [SerializeField] private TextMeshProUGUI moneyTextObject;
+    [SerializeField] private float startingMoney;
 
     private List<ItemData> itemList = new List<ItemData>();
     private float money;
@@ -81,7 +83,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void AddMoney(float valueToAdd) {
         money += valueToAdd;
-
+        UpdateMoneyUI();
         OnMoneyChanged?.Invoke(this, new InventoryMoneyEventArgs {
             ValueChange = valueToAdd,
             CurrentValue = money
@@ -92,11 +94,16 @@ public class PlayerInventory : MonoBehaviour
         if (money < valueToRemove) return false;
 
         money -= valueToRemove;
+        UpdateMoneyUI();
         OnMoneyChanged?.Invoke(this, new InventoryMoneyEventArgs {
             ValueChange = valueToRemove,
             CurrentValue = money
         });
         return true;
+    }
+
+    private void UpdateMoneyUI() {
+        moneyTextObject.text = money.ToString("F2");
     }
 
     public int GetItemCount() {
