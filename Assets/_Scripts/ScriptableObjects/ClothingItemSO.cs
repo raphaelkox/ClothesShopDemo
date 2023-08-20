@@ -18,4 +18,18 @@ public class ClothingItemSO : ItemSO
 
         return clothingItemData;
     }
+
+    public static ClothingItemData CloneClothingItemData(ClothingItemData clothingItemData) {
+        var itemDataClone = new ClothingItemData {
+            DisplayName = clothingItemData.DisplayName,
+            Description = clothingItemData.Description,
+            Icon = clothingItemData.Icon,
+            Price = clothingItemData.Price,
+            OutfitTextureSheet = clothingItemData.OutfitTextureSheet,
+            Equipped = clothingItemData.Equipped,
+            Blocked = clothingItemData.Blocked
+        };
+
+        return itemDataClone;
+    }
 }

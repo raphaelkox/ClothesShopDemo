@@ -51,10 +51,16 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void AddItems(List<ItemData> items) {
-        itemList.AddRange(items);
+        List<ItemData> newItems = new List<ItemData>();
 
+        foreach (var item in items)
+        {
+            newItems.Add(ItemDataFactory.CloneItemData(item));
+        }
+
+        itemList.AddRange(newItems);
         OnItemsAdded?.Invoke(this, new InventoryItemsEventArgs {
-            ItemList = items
+            ItemList = newItems
         });
     }
 

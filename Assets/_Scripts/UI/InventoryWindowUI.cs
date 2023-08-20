@@ -26,12 +26,15 @@ public class InventoryWindowUI : MonoBehaviour
     }
 
     private void Instance_OnPlayer_InventoryOpenPerformed(object sender, EventArgs e) {
+        Toggle();
+    }
+
+    public void Toggle() {
         state = !state;
 
         if (state) {
             Show();
-        }
-        else {
+        } else {
             Hide();
         }
     }

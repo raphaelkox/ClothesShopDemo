@@ -38,8 +38,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: TileBg0
+    uniqueID: 385815881
+    locked: 0
+  - name: TileBg1
+    uniqueID: 45041807
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TileBg2
+    uniqueID: 23193903
     locked: 0
   - name: UI
     uniqueID: 584331695

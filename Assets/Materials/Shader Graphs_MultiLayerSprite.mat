@@ -37,6 +37,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 814431688d91b4a49b8f1869134f0fc5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _HairTex:
+        m_Texture: {fileID: 2800000, guid: 0b67b4853d53e30449c82b4e2ce6f30f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: dc0dd7f6acf53b6459d1a1e4dd31430e, type: 3}
         m_Scale: {x: 1, y: 1}

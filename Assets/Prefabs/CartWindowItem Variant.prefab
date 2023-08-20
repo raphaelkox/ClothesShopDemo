@@ -355,8 +355,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xA3 00.00"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: da7c030fd852b864791c0f16173453a6, type: 2}
+  m_sharedMaterial: {fileID: 4337454454369334972, guid: da7c030fd852b864791c0f16173453a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -380,8 +380,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -515,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5912562948272513848, guid: 7a33810f04ade5e46826a98f8ff1d8be, type: 3}
       propertyPath: m_Name
-      value: CartWindowItem
+      value: CartWindowItem Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a33810f04ade5e46826a98f8ff1d8be, type: 3}
@@ -547,7 +547,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce17b34303ce5fe45aa31a7ebe5724f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item:
+    DisplayName: 
+    Description: 
+    Icon: {fileID: 0}
+    Price: 0
+    Blocked: 0
+    Equipped: 0
   iconObject: {fileID: 2930431670331663992}
   priceTextObject: {fileID: 7492139789417223938}
 --- !u!224 &7342515411431960935 stripped

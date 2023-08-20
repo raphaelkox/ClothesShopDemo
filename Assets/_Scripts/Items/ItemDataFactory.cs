@@ -10,4 +10,12 @@ public static class ItemDataFactory {
 
         return ItemSO.GetItemData(itemSO);
     }
+
+    public static ItemData CloneItemData(ItemData itemData) {
+        if (itemData is ClothingItemData) {
+            return ClothingItemSO.CloneClothingItemData(itemData as ClothingItemData);
+        }
+
+        return ItemSO.CloneItemData(itemData);
+    }
 }

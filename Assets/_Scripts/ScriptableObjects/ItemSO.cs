@@ -20,4 +20,17 @@ public class ItemSO : ScriptableObject
 
         return itemData;
     }
+
+    public static ItemData CloneItemData(ItemData itemData) {
+        var itemDataClone = new ItemData {
+            DisplayName = itemData.DisplayName,
+            Description = itemData.Description,
+            Icon = itemData.Icon,
+            Price = itemData.Price,
+            Equipped = itemData.Equipped,
+            Blocked = itemData.Blocked
+        };
+
+        return itemDataClone;
+    }
 }
