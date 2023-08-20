@@ -12,11 +12,13 @@ public class ShopItemUI : BaseItemUI
         public ItemData Item;
     }
 
+    [SerializeField] protected Button itemButton;
     [SerializeField] protected TextMeshProUGUI priceTextObject;
 
     public override void SetItem(ItemData item) {
         base.SetItem(item);
 
+        itemButton.interactable = !item.Equipped;
         priceTextObject.text = item.Price.ToString("F2");
     }
 

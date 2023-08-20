@@ -331,8 +331,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f107bbeb188515f418fc312fbedec4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item:
+    DisplayName: 
+    Description: 
+    Icon: {fileID: 0}
+    Price: 0
+    Blocked: 0
+    Equipped: 0
   iconObject: {fileID: 6333883569453711610}
+  itemButton: {fileID: 4168597363223873990}
   priceTextObject: {fileID: 8890433850061667686}
 --- !u!114 &4168597363223873990
 MonoBehaviour:
