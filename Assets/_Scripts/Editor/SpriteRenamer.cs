@@ -37,26 +37,34 @@ class RenameSpriteUtility : EditorWindow {
         sliceMetaData[24].name = "idle_left";
 
         int frame = 32;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             sliceMetaData[frame].name = $"walk_down_{i}";
+            sliceMetaData[frame].pivot = new Vector2(0.5f, 0.35f);
+            sliceMetaData[frame].alignment = SpriteAlignment.Custom;
             frame++;
         }
 
         frame = 40;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             sliceMetaData[frame].name = $"walk_up_{i}";
+            sliceMetaData[frame].pivot = new Vector2(0.5f, 0.35f);
+            sliceMetaData[frame].alignment = SpriteAlignment.Custom;
             frame++;
         }
 
         frame = 48;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             sliceMetaData[frame].name = $"walk_right_{i}";
+            sliceMetaData[frame].pivot = new Vector2(0.5f, 0.35f);
+            sliceMetaData[frame].alignment = SpriteAlignment.Custom;
             frame++;
         }
 
         frame = 56;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             sliceMetaData[frame].name = $"walk_left_{i}";
+            sliceMetaData[frame].pivot = new Vector2(0.5f, 0.35f);
+            sliceMetaData[frame].alignment = SpriteAlignment.Custom;
             frame++;
         }
 

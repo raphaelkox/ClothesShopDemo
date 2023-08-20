@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758f379a1a146484bbba0e2b3ee8a491, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ba36c603928b4746bccd72cd977858c, type: 3}
   m_Name: Outfit B
   m_EditorClassIdentifier: 
-  DisplayName: Stylish Outfit
+  DisplayName: Blue Outfit
   Description: 
-  Icon: {fileID: 21300000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
-  Price: 100
+  Icon: {fileID: -657029300, guid: e9c5ab115968ec0488cbf151b1837c78, type: 3}
+  Price: 50
+  OutfitTextureSheet: {fileID: 2800000, guid: e9c5ab115968ec0488cbf151b1837c78, type: 3}

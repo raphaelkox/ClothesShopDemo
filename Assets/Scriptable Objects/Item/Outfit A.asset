@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba36c603928b4746bccd72cd977858c, type: 3}
+  m_Name: Outfit A
+  m_EditorClassIdentifier: 
+  DisplayName: Yellow Outfit
+  Description: 
+  Icon: {fileID: -757827480, guid: 78f3246f607f1ac4fb37a706c346b359, type: 3}
+  Price: 20
+  OutfitTextureSheet: {fileID: 2800000, guid: 78f3246f607f1ac4fb37a706c346b359, type: 3}

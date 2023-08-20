@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758f379a1a146484bbba0e2b3ee8a491, type: 3}
-  m_Name: Outfit A
+  m_Script: {fileID: 11500000, guid: 7ba36c603928b4746bccd72cd977858c, type: 3}
+  m_Name: Outfit C
   m_EditorClassIdentifier: 
-  DisplayName: Plain Outfit
+  DisplayName: Bikini
   Description: 
-  Icon: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
-  Price: 10
+  Icon: {fileID: -1315012035, guid: 46b63b27ede8e754fa4622775572ccb9, type: 3}
+  Price: 100
+  OutfitTextureSheet: {fileID: 2800000, guid: 46b63b27ede8e754fa4622775572ccb9, type: 3}
