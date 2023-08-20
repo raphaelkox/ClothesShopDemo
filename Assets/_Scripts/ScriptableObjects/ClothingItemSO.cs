@@ -5,12 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Clothing Item")]
 public class ClothingItemSO : ItemSO
 {
-    public Texture2D OutfitTextureSheet;
-
-    public override bool Use() {
-        PlayerOutfitController.Instance.SetOutift(this);
-        return true;
-    }
+    public Texture2D OutfitTextureSheet;    
 
     public static ClothingItemData GetClothingItemData(ClothingItemSO clothingItemSO) {
         var clothingItemData = new ClothingItemData {
@@ -18,8 +13,7 @@ public class ClothingItemSO : ItemSO
             Description = clothingItemSO.Description,
             Icon = clothingItemSO.Icon,
             Price = clothingItemSO.Price,
-            OutfitTextureSheet = clothingItemSO.OutfitTextureSheet,
-            UseFunction = clothingItemSO.Use
+            OutfitTextureSheet = clothingItemSO.OutfitTextureSheet
         };
 
         return clothingItemData;

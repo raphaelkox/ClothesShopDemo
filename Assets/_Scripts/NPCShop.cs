@@ -25,7 +25,7 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     private List<ItemData> shopItemDataList;
 
     private void Start() {
-        shopItemDataList = shopItemList.ItemsData;
+        shopItemDataList = shopItemList.GetItemsData();
         HideObjects();
         RegisterEvents();
     }

@@ -7,18 +7,13 @@ public class ShopItemListSO : ScriptableObject
 {
     public List<ItemSO> Items;
 
-    private List<ItemData> itemsData = new List<ItemData>();
-    public List<ItemData> ItemsData {
-        get {
-            if (itemsData.Count <= 0) {
-                itemsData = new List<ItemData>();
+    public List<ItemData> GetItemsData() {
+        List<ItemData> itemsData = new();
 
-                foreach (var item in Items)
-                {
-                    itemsData.Add(ItemDataFactory.GetItemData(item));
-                }
-            }
-            return itemsData;
-        } private set { }
-    }
+        foreach (var item in Items) {
+            itemsData.Add(ItemDataFactory.GetItemData(item));
+        }
+
+        return itemsData;
+    }    
 }

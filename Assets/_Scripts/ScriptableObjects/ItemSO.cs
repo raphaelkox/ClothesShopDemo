@@ -8,9 +8,7 @@ public class ItemSO : ScriptableObject
     public string DisplayName;
     public string Description;
     public Sprite Icon;
-    public float Price;
-
-    public virtual bool Use() { return false; }
+    public float Price;    
 
     public static ItemData GetItemData(ItemSO itemSO) {
         var itemData = new ItemData {
@@ -18,7 +16,6 @@ public class ItemSO : ScriptableObject
             Description = itemSO.Description,
             Icon = itemSO.Icon,
             Price = itemSO.Price,
-            UseFunction = itemSO.Use
         };
 
         return itemData;

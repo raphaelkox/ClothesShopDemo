@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerInventoryWindowUI : MonoBehaviour
+public class InventoryWindowUI : MonoBehaviour
 {
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private Transform containerTransform;
@@ -45,7 +45,7 @@ public class PlayerInventoryWindowUI : MonoBehaviour
             itemObj = itemUI.Getitem();
             if (e.ItemList.Contains(itemObj))
             {
-                itemUI.Reset();
+                itemUI.ResetSlot();
                 e.ItemList.Remove(itemObj);
             }
         }
@@ -81,5 +81,13 @@ public class PlayerInventoryWindowUI : MonoBehaviour
 
     public void Hide() {
         gameObject.SetActive(false);
+    }
+
+    public InventoryItemUI GetSlot(int index) { 
+        if(index < containerTransform.childCount) {
+            return containerTransform.GetChild(index).GetComponent<InventoryItemUI>();
+        }
+
+        return null;
     }
 }

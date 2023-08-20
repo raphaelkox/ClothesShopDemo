@@ -14,10 +14,10 @@ public class BaseItemUI : MonoBehaviour
 
     public virtual void SetItem(ItemData item) {
         this.item = item;
-        iconObject.sprite = item.Icon;
+        iconObject.sprite = item.Icon;        
     }
 
-    public void Reset() {
+    public virtual void ResetSlot() {
         gameObject.SetActive(false);
         transform.SetAsLastSibling();
         item = null;

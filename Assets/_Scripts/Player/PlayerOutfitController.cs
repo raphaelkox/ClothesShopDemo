@@ -10,6 +10,8 @@ public class PlayerOutfitController : MonoBehaviour
 
     MaterialPropertyBlock materialBlock;
 
+    private ClothingItemData currentOutfit;
+
     private void Awake() {
         Instance = this;
     }
@@ -18,8 +20,19 @@ public class PlayerOutfitController : MonoBehaviour
          materialBlock = new MaterialPropertyBlock();
     }
 
-    public void SetOutift(ClothingItemSO clothingItem) {
+    public void SetOutift(ClothingItemData clothingItem) {
+        if(currentOutfit != null) {
+            currentOutfit.Unnequip();
+        }
+
+        currentOutfit = clothingItem;
         materialBlock.SetTexture("_ClothesTex", clothingItem.OutfitTextureSheet);
+        spriteRenderer.SetPropertyBlock(materialBlock);
+    }
+
+    public void RemoveOutfit() {
+        currentOutfit = null;
+        materialBlock.SetTexture("_ClothesTex", Texture2D.blackTexture);
         spriteRenderer.SetPropertyBlock(materialBlock);
     }
 }
