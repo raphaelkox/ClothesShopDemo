@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class ShopWindow : MonoBehaviour, IUIWindow
@@ -23,14 +24,22 @@ public class ShopWindow : MonoBehaviour, IUIWindow
         cartSubWindow.OnCartAction += CartSubWindow_OnCartAction;
     }
 
-    public void SetTitleBar(string titleText, Color titleBarColor) {
-        windowTitleBar.SetTitleText(titleText);
-        windowTitleBar.SetTitleBarColor(titleBarColor);
-        cartTitleBar.SetTitleBarColor(titleBarColor);
+    public void Setup(
+        List<ItemSO> itemsToDisplay, 
+        bool ignoreMoneyFlag,
+        EventHandler<ShopCartSubWindow.CartWindowActionEventArgs> cartActionCallback,
+        ShopWindowStyleSO windowSyle
+        ) {
+        PopulateItems(itemsToDisplay);
+        cartSubWindow.SetIgnoreMoneyFlag(ignoreMoneyFlag);
+        windowCartAction = cartActionCallback;
+        SetTitleBar(windowSyle);
     }
 
-    public void RegisterWindowCartAction(EventHandler<ShopCartSubWindow.CartWindowActionEventArgs> callback) {
-        windowCartAction = callback;
+    private void SetTitleBar(ShopWindowStyleSO titleBarStyle) {
+        windowTitleBar.SetTitleText(titleBarStyle.TitleText);
+        windowTitleBar.SetTitleBarColor(titleBarStyle.TitleBarColor);
+        cartTitleBar.SetTitleBarColor(titleBarStyle.TitleBarColor);
     }
 
     public void UnregisterWindowCartAction() {

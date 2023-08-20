@@ -25,6 +25,7 @@ public class ShopCartSubWindow : MonoBehaviour
     public List<ItemSO> cartItems = new List<ItemSO>();
 
     private float subTotal;
+    private bool ignoreMoneyAmount;
 
     private void Start() {
         actionButton.onClick.AddListener(OnActionClick);
@@ -105,12 +106,21 @@ public class ShopCartSubWindow : MonoBehaviour
     private void UpdateSubtotal() {
         subTotalTextObject.text = subTotal.ToString("F2");
 
+        if (ignoreMoneyAmount && cartItems.Count > 0) {
+            SetActionState(true);
+            return;
+        }
+
         bool playerHasEnoughMoney = PlayerInventory.Instance.HasEnoughMoney(subTotal);
         subTotalTextObject.color = playerHasEnoughMoney ? subTotalOkTextColor : subTotalBlockedTextColor;
-        SetActionState(playerHasEnoughMoney);
+        SetActionState(playerHasEnoughMoney && cartItems.Count > 0);
     }
 
     public void SetActionState(bool newState) {
         actionButton.interactable = newState;
+    }
+
+    public void SetIgnoreMoneyFlag(bool newState) { 
+        ignoreMoneyAmount = newState;
     }
 }

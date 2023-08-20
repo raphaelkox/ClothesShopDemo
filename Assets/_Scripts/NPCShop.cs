@@ -51,16 +51,22 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     }
 
     private void ShopOptionsWindow_OnBuyClick(object sender, EventArgs e) {
-        shopWindow.SetTitleBar(buyWindowStyle.TitleText, buyWindowStyle.TitleBarColor);
-        shopWindow.RegisterWindowCartAction(BuyItems);
-        shopWindow.PopulateItems(shopItemList.Items);
+        shopWindow.Setup(
+            shopItemList.Items,
+            false,
+            BuyItems,
+            buyWindowStyle
+        );
         UIWindowStack.Instance.PushWindow(shopWindow);
     }
 
     private void ShopOptionsWindow_OnSellClick(object sender, EventArgs e) {
-        shopWindow.SetTitleBar(sellWindowStyle.TitleText, sellWindowStyle.TitleBarColor);
-        shopWindow.RegisterWindowCartAction(SellItems);
-        shopWindow.PopulateItems(PlayerInventory.Instance.GetItems());
+        shopWindow.Setup(
+            PlayerInventory.Instance.GetItems(),
+            true,
+            SellItems,
+            sellWindowStyle
+        );
         UIWindowStack.Instance.PushWindow(shopWindow);
     }    
 
