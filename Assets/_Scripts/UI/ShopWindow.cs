@@ -25,7 +25,7 @@ public class ShopWindow : MonoBehaviour, IUIWindow
     }
 
     public void Setup(
-        List<ItemSO> itemsToDisplay, 
+        List<ItemData> itemsToDisplay, 
         bool ignoreMoneyFlag,
         EventHandler<ShopCartSubWindow.CartWindowActionEventArgs> cartActionCallback,
         ShopWindowStyleSO windowSyle
@@ -58,7 +58,7 @@ public class ShopWindow : MonoBehaviour, IUIWindow
         });
     }
 
-    public void PopulateItems(List<ItemSO> itemList) {
+    public void PopulateItems(List<ItemData> itemList) {
         if(itemList.Count > containerTransform.childCount) {
             //iterate over available slots
             for (int i = 0; i < containerTransform.childCount; i++) {

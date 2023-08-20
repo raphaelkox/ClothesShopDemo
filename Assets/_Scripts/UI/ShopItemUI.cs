@@ -9,12 +9,12 @@ public class ShopItemUI : BaseItemUI
 {
     public event EventHandler<ShopItemEventArgs> OnAddItemToCart;
     public class ShopItemEventArgs : EventArgs {
-        public ItemSO Item;
+        public ItemData Item;
     }
 
     [SerializeField] protected TextMeshProUGUI priceTextObject;
 
-    public override void SetItem(ItemSO item) {
+    public override void SetItem(ItemData item) {
         base.SetItem(item);
 
         priceTextObject.text = item.Price.ToString("F2");

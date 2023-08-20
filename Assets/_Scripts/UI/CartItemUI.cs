@@ -16,7 +16,7 @@ public class CartItemUI : BaseItemUI
 
     private int index;
 
-    public override void SetItem(ItemSO item) {
+    public override void SetItem(ItemData item) {
         base.SetItem(item);
 
         priceTextObject.text = item.Price.ToString("F2");

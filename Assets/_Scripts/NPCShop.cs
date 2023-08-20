@@ -22,8 +22,10 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
     [SerializeField] private ShopItemListSO shopItemList;
 
     private bool interactionBlocked;
+    private List<ItemData> shopItemDataList;
 
     private void Start() {
+        shopItemDataList = shopItemList.ItemsData;
         HideObjects();
         RegisterEvents();
     }
@@ -52,7 +54,7 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
 
     private void ShopOptionsWindow_OnBuyClick(object sender, EventArgs e) {
         shopWindow.Setup(
-            shopItemList.Items,
+            shopItemDataList,
             false,
             BuyItems,
             buyWindowStyle

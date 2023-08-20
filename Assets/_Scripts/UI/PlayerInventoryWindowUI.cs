@@ -38,7 +38,7 @@ public class PlayerInventoryWindowUI : MonoBehaviour
 
     private void PlayerInventory_OnItemsRemoved(object sender, PlayerInventory.InventoryItemsEventArgs e) {
         InventoryItemUI itemUI;
-        ItemSO itemObj;
+        ItemData itemObj;
 
         for (int i = containerTransform.childCount - 1; i >= 0; i--) {
             itemUI = containerTransform.GetChild(i).GetComponent<InventoryItemUI>();
@@ -58,7 +58,7 @@ public class PlayerInventoryWindowUI : MonoBehaviour
         }
     }
 
-    private void AddItemSlot(ItemSO item) {
+    private void AddItemSlot(ItemData item) {
         InventoryItemUI itemSlot;
 
         int itemCount = playerInventory.GetItemCount();

@@ -10,7 +10,7 @@ public class ShopCartSubWindow : MonoBehaviour
 {
     public event EventHandler<CartWindowActionEventArgs> OnCartAction;
     public class CartWindowActionEventArgs {
-        public List<ItemSO> ItemList;
+        public List<ItemData> ItemList;
         public List<int> ItemIndexes;
         public float MoneyAmount;
     }
@@ -22,7 +22,7 @@ public class ShopCartSubWindow : MonoBehaviour
     [SerializeField] private Color subTotalBlockedTextColor = Color.white;
     [SerializeField] private Button actionButton;
 
-    public List<ItemSO> cartItems = new List<ItemSO>();
+    public List<ItemData> cartItems = new List<ItemData>();
 
     private float subTotal;
     private bool ignoreMoneyAmount;
@@ -51,7 +51,7 @@ public class ShopCartSubWindow : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemSO item) {
+    public void AddItem(ItemData item) {
         CartItemUI itemSlot;
         
         if (cartItems.Count >= containerTransform.childCount) {
@@ -77,7 +77,7 @@ public class ShopCartSubWindow : MonoBehaviour
         RemoveItemFromList(index);
     }
 
-    private void AddItemToList(ItemSO item) {
+    private void AddItemToList(ItemData item) {
         cartItems.Add(item);
 
         subTotal += item.Price;
@@ -87,7 +87,7 @@ public class ShopCartSubWindow : MonoBehaviour
     }
 
     private void RemoveItemFromList(int index) {
-        ItemSO item = cartItems[index];
+        ItemData item = cartItems[index];
 
         subTotal -= item.Price;
         UpdateSubtotal();

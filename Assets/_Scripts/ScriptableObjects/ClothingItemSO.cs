@@ -11,4 +11,17 @@ public class ClothingItemSO : ItemSO
         PlayerOutfitController.Instance.SetOutift(this);
         return true;
     }
+
+    public static ClothingItemData GetClothingItemData(ClothingItemSO clothingItemSO) {
+        var clothingItemData = new ClothingItemData {
+            DisplayName = clothingItemSO.DisplayName,
+            Description = clothingItemSO.Description,
+            Icon = clothingItemSO.Icon,
+            Price = clothingItemSO.Price,
+            OutfitTextureSheet = clothingItemSO.OutfitTextureSheet,
+            UseFunction = clothingItemSO.Use
+        };
+
+        return clothingItemData;
+    }
 }

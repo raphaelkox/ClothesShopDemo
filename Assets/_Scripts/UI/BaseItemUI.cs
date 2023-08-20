@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class BaseItemUI : MonoBehaviour
 {
-    [SerializeField] protected ItemSO item;
+    [SerializeField] protected ItemData item;
     [SerializeField] protected Image iconObject;
 
-    public ItemSO Getitem() {
+    public ItemData Getitem() {
         return item;
     }
 
-    public virtual void SetItem(ItemSO item) {
+    public virtual void SetItem(ItemData item) {
         this.item = item;
         iconObject.sprite = item.Icon;
     }

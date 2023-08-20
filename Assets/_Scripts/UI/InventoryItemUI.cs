@@ -8,7 +8,7 @@ public class InventoryItemUI : BaseItemUI
     public event EventHandler<InventoryItemEventArgs> OnItemUsed;
     public class InventoryItemEventArgs : EventArgs {
         public int itemIndex;
-        public ItemSO item;
+        public ItemData item;
     }
 
     private int index;
@@ -18,7 +18,7 @@ public class InventoryItemUI : BaseItemUI
     }
 
     public void UsetItem() {
-        if (item.Use()) {
+        if (item.UseFunction()) {
             OnItemUsed?.Invoke(this, new InventoryItemEventArgs {
                 itemIndex = index,
                 item = item,

@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     public event EventHandler<InventoryItemsEventArgs> OnItemsAdded;
     public event EventHandler<InventoryItemsEventArgs> OnItemsRemoved;
     public class InventoryItemsEventArgs : EventArgs {
-        public List<ItemSO> ItemList;
+        public List<ItemData> ItemList;
     }
 
     public event EventHandler<InventoryMoneyEventArgs> OnMoneyChanged;
@@ -21,7 +21,7 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] float startingMoney;
 
-    private List<ItemSO> itemList = new List<ItemSO>();
+    private List<ItemData> itemList = new List<ItemData>();
     private float money;
 
     private void Awake() {
@@ -32,25 +32,25 @@ public class PlayerInventory : MonoBehaviour
         AddMoney(startingMoney);
     }
 
-    public List<ItemSO> GetItems() {
+    public List<ItemData> GetItems() {
         return itemList;
     }
 
-    public void BuyItems(List<ItemSO> items, float price) {
+    public void BuyItems(List<ItemData> items, float price) {
         AddItems(items);
         RemoveMoney(price);
     }
 
-    public void SellItems(List<ItemSO> items, float price) {
+    public void SellItems(List<ItemData> items, float price) {
         RemoveItems(items);
         AddMoney(price);
     }
 
-    public void AddItem(ItemSO item) {
-        AddItems(new List<ItemSO> { item });
+    public void AddItem(ItemData item) {
+        AddItems(new List<ItemData> { item });
     }
 
-    public void AddItems(List<ItemSO> items) {
+    public void AddItems(List<ItemData> items) {
         itemList.AddRange(items);
 
         OnItemsAdded?.Invoke(this, new InventoryItemsEventArgs {
@@ -58,7 +58,7 @@ public class PlayerInventory : MonoBehaviour
         });
     }
 
-    public void RemoveItems(List<ItemSO> itemsToDelete) {
+    public void RemoveItems(List<ItemData> itemsToDelete) {
         foreach (var item in itemsToDelete)
         {
             itemList.Remove(item);
