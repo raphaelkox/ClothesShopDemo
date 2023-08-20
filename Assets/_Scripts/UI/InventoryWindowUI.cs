@@ -38,6 +38,8 @@ public class InventoryWindowUI : MonoBehaviour
         } else {
             Hide();
         }
+
+        UISoundEffects.Instance.PlayWindowSfx();
     }
 
     private void PlayerInventory_OnItemsRemoved(object sender, PlayerInventory.InventoryItemsEventArgs e) {
@@ -80,14 +82,10 @@ public class InventoryWindowUI : MonoBehaviour
     }
 
     public void Show() {
-        UISoundEffects.Instance.PlayWindowSfx();
-
         gameObject.SetActive(true);
     }
 
-    public void Hide() {
-        UISoundEffects.Instance.PlayWindowSfx();
-
+    public void Hide() {       
         gameObject.SetActive(false);
     }
 
