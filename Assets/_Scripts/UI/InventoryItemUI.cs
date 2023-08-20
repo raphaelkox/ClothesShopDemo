@@ -43,6 +43,8 @@ public class InventoryItemUI : BaseItemUI
         item.OnItemEquipped -= Item_OnItemEquipped;
     }
     public void UsetItem() {
+        UISoundEffects.Instance.PlayClickSfx();
+
         if (item.Use()) {
             OnItemUsed?.Invoke(this, new InventoryItemEventArgs {
                 itemIndex = index,

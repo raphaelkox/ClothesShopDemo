@@ -28,5 +28,7 @@ public class ShopItemUI : BaseItemUI
 
     public void AddToCart() {
         OnAddItemToCart?.Invoke(this, new ShopItemEventArgs { Item = item });
+
+        UISoundEffects.Instance.PlayClickSfx();
     }
 }

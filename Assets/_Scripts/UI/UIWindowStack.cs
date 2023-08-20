@@ -32,6 +32,8 @@ public class UIWindowStack : MonoBehaviour
         }
 
         SetCurrentWindow(window);
+
+        UISoundEffects.Instance.PlayWindowSfx();
     }
 
     private void SetCurrentWindow(IUIWindow window) {
@@ -41,6 +43,8 @@ public class UIWindowStack : MonoBehaviour
     }
 
     private void Window_OnWindowClose(object sender, IUIWindow.WindowEventArgs e) {
+        UISoundEffects.Instance.PlayWindowSfx();
+
         e.Window.OnWindowClose -= Window_OnWindowClose;
 
         if (windowStack.Count > 0) {

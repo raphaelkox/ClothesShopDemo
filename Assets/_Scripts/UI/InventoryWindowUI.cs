@@ -27,6 +27,7 @@ public class InventoryWindowUI : MonoBehaviour
 
     private void Instance_OnPlayer_InventoryOpenPerformed(object sender, EventArgs e) {
         Toggle();
+
     }
 
     public void Toggle() {
@@ -79,10 +80,14 @@ public class InventoryWindowUI : MonoBehaviour
     }
 
     public void Show() {
+        UISoundEffects.Instance.PlayWindowSfx();
+
         gameObject.SetActive(true);
     }
 
     public void Hide() {
+        UISoundEffects.Instance.PlayWindowSfx();
+
         gameObject.SetActive(false);
     }
 

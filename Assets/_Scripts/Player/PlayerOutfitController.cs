@@ -28,11 +28,15 @@ public class PlayerOutfitController : MonoBehaviour
         currentOutfit = clothingItem;
         materialBlock.SetTexture("_ClothesTex", clothingItem.OutfitTextureSheet);
         spriteRenderer.SetPropertyBlock(materialBlock);
+
+        UISoundEffects.Instance.PlayEquipItemSfx();
     }
 
     public void RemoveOutfit() {
         currentOutfit = null;
         materialBlock.SetTexture("_ClothesTex", Texture2D.blackTexture);
         spriteRenderer.SetPropertyBlock(materialBlock);
+
+        UISoundEffects.Instance.PlayEquipItemSfx();
     }
 }

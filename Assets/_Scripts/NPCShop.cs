@@ -32,10 +32,12 @@ public class NPCShop : MonoBehaviour, IPlayerInteraction
 
     private void BuyItems(object sender, ShopCartSubWindow.CartWindowActionEventArgs e) {
         PlayerInventory.Instance.BuyItems(e.ItemList, e.MoneyAmount);
+        UISoundEffects.Instance.PlayBuySellSfx();
     }
 
     private void SellItems(object sender, ShopCartSubWindow.CartWindowActionEventArgs e) {
         PlayerInventory.Instance.SellItems(e.ItemList, e.MoneyAmount);
+        UISoundEffects.Instance.PlayBuySellSfx();
 
         //refresh shop view
         shopWindow.PopulateItems(PlayerInventory.Instance.GetItems());

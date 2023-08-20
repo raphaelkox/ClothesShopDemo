@@ -31,6 +31,8 @@ public class CartItemUI : BaseItemUI
     }
 
     public void RemoveItem() {
+        UISoundEffects.Instance.PlayClickSfx();
+
         OnItemRemoved?.Invoke(this, new CartItemEventArgs { 
             ItemIndex = index 
         });
