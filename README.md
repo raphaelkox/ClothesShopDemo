@@ -17,10 +17,10 @@ base Item classes, making it possible to create new item categories easily).
 
 The Controls are:
 
-WASD - Movement
-E - Start interaction
-Tab - Toggle the Inventory window
-Esc - Close the topmost window displayed.
+WASD - Movement  
+E - Start interaction  
+Tab - Toggle the Inventory window  
+Esc - Close the topmost window displayed.  
 
 The mouse is used to click on items
 and buttons on the interface.
